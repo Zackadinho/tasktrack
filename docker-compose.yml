@@ -1,0 +1,24 @@
+services:
+  db:
+    image: postgres:16
+    env_file: .env
+    volumes:
+      - db_data:/var/lib/postgresql/data   # named volume: data survives `docker compose down`
+    ports:
+      - "5432:5432"                         # exposed only so you can poke at it with psql; remove in production
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      interval: 5s
+      retries: 10
+
+  backend:
+    build: ./backend
+    env_file: .env
+    ports:
+      - "8000:8000"
+    depends_on:
+      db:
+        condition: service_healthy          # wait until Postgres actually accepts connections
+
+volumes:
+  db_data:
