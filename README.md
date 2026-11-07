@@ -1,5 +1,7 @@
 # TaskTrack — a learning project
 
+> 📌 **Quick reference:** [docs/CHEATSHEET.md](docs/CHEATSHEET.md) lists commands, terms, status codes and troubleshooting in one place.
+
 A task tracker with user accounts, built from scratch one layer at a time.
 The point isn't the app itself. A task tracker is small enough to finish, and it
 still touches every layer a real product has: an API, a database, a UI, logins,
