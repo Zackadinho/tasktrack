@@ -34,17 +34,18 @@ security, containers, and CI/CD.
 | Phase | What you build | What you learn | Status |
 |---|---|---|---|
 | 1 | Backend API + database | REST, HTTP methods, ORM, validation, Docker Compose | ✅ [docs/01-backend.md](docs/01-backend.md) |
-| 2 | Frontend | React components, state, calling an API, CORS | ⏳ |
+| 2 | Frontend | React components, state, calling an API, CORS | ✅ [docs/02-frontend.md](docs/02-frontend.md) |
 | 3 | Users & login | Password hashing, JWT tokens, authorization, DB migrations | ⏳ |
 | 4 | Security hardening | Secrets, HTTPS, rate limiting, OWASP Top 10, dependency scanning | ⏳ |
 | 5 | Tests + CI/CD | pytest, GitHub Actions pipeline, building images | ⏳ |
 | 6 | Deploy | Running it on a real server or cloud | ⏳ |
 
-## Quick start (Phase 1)
+## Quick start
 
 ```bash
 cp .env.example .env
 docker compose up --build
 ```
 
-Then open http://localhost:8000/docs
+- App: http://localhost:3000
+- API docs: http://localhost:8000/docs

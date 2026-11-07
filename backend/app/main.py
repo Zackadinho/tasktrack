@@ -2,7 +2,9 @@
 from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 
+from .config import settings
 from .database import Base, engine
 from .routers import tasks
 
@@ -17,6 +19,20 @@ async def lifespan(app: FastAPI):
 
 
 app = FastAPI(title="TaskTrack API", lifespan=lifespan)
+
+# CORS (Cross-Origin Resource Sharing):
+# The frontend runs on localhost:5173 and the API on localhost:8000. To a browser those
+# are different "origins", and by default it BLOCKS JavaScript from reading responses
+# across origins. That rule stops evil.com from quietly calling your bank's API with
+# your cookies. This middleware tells the browser which origins we trust.
+# Never use allow_origins=["*"] once logins exist.
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=settings.cors_origin_list,
+    allow_methods=["GET", "POST", "PATCH", "DELETE"],
+    allow_headers=["Content-Type", "Authorization"],
+)
+
 app.include_router(tasks.router)
 
 

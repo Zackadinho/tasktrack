@@ -20,5 +20,15 @@ services:
       db:
         condition: service_healthy          # wait until Postgres actually accepts connections
 
+  frontend:
+    build:
+      context: ./frontend
+      args:
+        VITE_API_URL: http://localhost:8000 # the BROWSER calls this, so it's localhost, not "backend"
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
+
 volumes:
   db_data:
